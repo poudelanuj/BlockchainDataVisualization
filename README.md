@@ -27,6 +27,7 @@ npm install webpack webpack-dev-server
 
 <h4>Step 4</h4>
 <p>Install Babel<p>
+
 ```
 npm install --save-dev babel-cli
 ```
