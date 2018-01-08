@@ -3,6 +3,7 @@
 <h4>Step 1</h4>
 
 <p>Clone the repository</p>
+
 ```
 git clone https://github.com/poudelanuj/BlockchainDataVisualization.git
 ```
@@ -10,6 +11,7 @@ git clone https://github.com/poudelanuj/BlockchainDataVisualization.git
 <h4>Step 2</h4>
 
 <p>Inside the project Directory, initialize npm</p>
+
 ```
 npm init
 ```
