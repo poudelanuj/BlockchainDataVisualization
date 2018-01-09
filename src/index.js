@@ -2,6 +2,8 @@ import * as d3 from 'd3';
 
 var margin = {top: 20, right: 10, bottom: 20, left: 100};
 
+var width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
     var svg = d3.select("svg"),
         width = +svg.attr("width") - margin.left - margin.right,

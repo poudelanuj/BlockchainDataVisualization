@@ -51,9 +51,17 @@ npm install babel-preset-env --save-dev
 npm install html-webpack-plugin
 ```
 
-<h4> Step 5</h4>
+<h4> Step 6</h4>
 <p>Install D3</p>
 
 ```
 npm install d3
 ```
+
+
+<B> To Run in the local host</B>
+```
+npm start
+```
+
+<h3><p> Then in browser  type the url <a href="localhost:8080">localhost:8080</a><p></h3>
