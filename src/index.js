@@ -1,52 +1,57 @@
 import * as d3 from 'd3';
 
-var data = [{
-    "sale": "202",
-    "year": "2000"
-}, {
-    "sale": "215",
-    "year": "2001"
-}, {
-    "sale": "179",
-    "year": "2002"
-}, {
-    "sale": "199",
-    "year": "2003"
-}, {
-    "sale": "134",
-    "year": "2003"
-}, {
-    "sale": "176",
-    "year": "2010"
-}];
+var margin = {top: 20, right: 10, bottom: 20, left: 100};
 
 
-var vis = d3.select("#visualisation"),
-    WIDTH = 1000,
-    HEIGHT = 500,
-    MARGINS = {
-        top: 20,
-        right: 20,
-        bottom: 20,
-        left: 50
-    };
-var xScale = d3.scaleLinear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([2000,2010]);
+    var svg = d3.select("svg"),
+        width = +svg.attr("width") - margin.left - margin.right,
+        height = +svg.attr("height") - margin.top - margin.bottom,
+        g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var yScale = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([134,215]);
+    var parseTime = d3.timeParse("%d/%m/%Y");
 
-var xAxis =d3.axisBottom()
-    .scale(xScale);
+    var x = d3.scaleTime()
+        .rangeRound([0, width]);
 
-var yAxis = d3.axisLeft()
-        .scale(yScale).orient("left");
+    var y = d3.scaleLinear()
+        .rangeRound([height, 0]);
 
-vis.append("svg:g")
-  .call(xAxis);
+    var line = d3.line()
+        .x(function(d) { return x(d.date); })
+        .y(function(d) { return y(d.market_cap); });
 
-vis.append("svg:g")
-    .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
-    .call(xAxis);
+    d3.csv("Data/bitcoin.csv", function(d) {
+      d.date = parseTime(d.date);
+      d.market_cap = +d.market_cap;
+      return d;
+    }, function(error, data) {
+      if (error) throw error;
 
-vis.append("svg:g")
-    .attr("transform", "translate(" + (MARGINS.left) + ",0)")
-    .call(yAxis);
+      x.domain(d3.extent(data, function(d) { return d.date; }));
+      y.domain(d3.extent(data, function(d) { return d.market_cap; }));
+
+      g.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x))
+        .select(".domain")
+          .remove();
+
+      g.append("g")
+          .call(d3.axisLeft(y))
+        .append("text")
+          .attr("fill", "#000")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 6)
+          .attr("dy", "0.71em")
+          .attr("text-anchor", "end")
+          .text("Market Cpaital");
+
+      g.append("path")
+          .datum(data)
+          .attr("fill", "none")
+          .attr("stroke", "steelblue")
+          .attr("stroke-linejoin", "round")
+          .attr("stroke-linecap", "round")
+          .attr("stroke-width", 1.5)
+          .attr("d", line);
+    });

@@ -1,11 +1,15 @@
+body { font: 12px Arial;}
 
-
-.chart rect {
-  fill: steelblue;
+path {
+  stroke: steelblue;
+  stroke-width: 2;
+  fill: none;
 }
 
-.chart text {
-  fill: white;
-  font: 10px sans-serif;
-  text-anchor: middle;
+.axis path,
+.axis line {
+	fill: none;
+	stroke: grey;
+	stroke-width: 1;
+	shape-rendering: crispEdges;
 }
