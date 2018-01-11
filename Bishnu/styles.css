@@ -1,0 +1,36 @@
+body {
+  background-color: #F1F3F3    
+}
+
+
+.line {
+  fill: none;
+  stroke: #6F257F;
+  stroke-width: 3px;
+}
+.axis {
+    fill: none;
+    stroke: black;
+    stroke-dasharray: 6px, 0px;
+    shape-rendering: crispEdges;
+    stroke-width: 1px;
+}
+
+.axis text{
+        font-family: 'Proxima-Nova', sans-serif;
+    font-size: 13px;
+    pointer-events: none;
+    fill: black;
+    
+}
+
+.grid line {
+  stroke: blue;
+  stroke-dasharray: 7px, 2px;
+  shape-rendering: crispEdges;
+     stroke-opacity: 100;
+ }
+
+.grid path {
+  stroke-width: 0;
+}
